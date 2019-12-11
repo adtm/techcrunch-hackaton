@@ -35,10 +35,7 @@ interface ListCardListState {
     loading: loading.models.listCardList,
   }),
 )
-class ListCardList extends Component<
-  ListCardListProps,
-  ListCardListState
-> {
+class ListCardList extends Component<ListCardListProps, ListCardListState> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({

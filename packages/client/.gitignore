@@ -38,3 +38,6 @@ screenshot
 .eslintcache
 
 build
+
+# Local Netlify folder
+.netlify
