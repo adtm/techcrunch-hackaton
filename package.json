@@ -4,7 +4,8 @@
   "scripts": {
     "lerna": "lerna",
     "start": "lerna run start",
-    "api": "cd ./packages/server && npm run start"
+    "api": "cd ./packages/server && npm run start",
+    "postinstall": "lerna bootstrap"
   },
   "devDependencies": {
     "lerna": "^3.18.4"
