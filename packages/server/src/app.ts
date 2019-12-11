@@ -2,8 +2,10 @@ import * as dotenv from "dotenv";
 import Koa from "koa";
 import koaBody from "koa-body";
 import Router from "koa-router";
-import { Ticket, User } from "./models";
+import { Ticket } from "./models";
 import EventService from "./services/event.service";
+import TicketService from "./services/ticket.service";
+import UserService from "./services/user.service";
 
 dotenv.config();
 
@@ -19,11 +21,8 @@ router.get("/", async ctx => {
 //User
 
 router.get("/user", async ctx => {
-  const user: User = {
-    id: 1,
-    name: "John Cena"
-  };
-  ctx.body = user;
+  //Username
+  ctx.body = new UserService().getUser(ctx.query.username);
 });
 
 //Events
@@ -41,36 +40,18 @@ const event = {
 };
 
 router.get("/user/tickets", async ctx => {
-  const tickets: Ticket[] = [
-    {
-      id: 1,
-      owner: 1,
-      event: event,
-      price: 20
-    }
-  ];
-  return tickets;
+  const userId = ctx.query.userId;
+  return new TicketService().getUserTicketsById(userId);
 });
 
 router.get("/ticket", async ctx => {
-  const ticket: Ticket = {
-    id: 1,
-    owner: 1,
-    event: event,
-    price: 20
-  };
-  ctx.body = ticket;
+  ctx.body = new TicketService().getTicketById(ctx.query.ticketId);
 });
 
 router.put("/ticket", async ctx => {
-  const newOwner = ctx.request.body.newOwner;
-  const ticket: Ticket = {
-    id: 1,
-    owner: newOwner,
-    event: event,
-    price: 20
-  };
-  ctx.body = ticket;
+  const newOwnerId = ctx.request.body.newOwnerId;
+  const ticketId = ctx.request.body.ticketId;
+  ctx.body = new TicketService().updateTicketOwner(ticketId, newOwnerId);
 });
 
 router.post("/ticket", async ctx => {
@@ -78,7 +59,7 @@ router.post("/ticket", async ctx => {
   //Create a new ticket (or take from existing pool)
   const ticket: Ticket = {
     id: 1,
-    owner: newOwner,
+    ownerId: newOwner,
     event: event,
     price: 20
   };
