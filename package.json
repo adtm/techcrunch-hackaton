@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "lerna": "lerna",
-    "start": "lerna run start",
+    "start": "lerna run --parallel start",
     "api": "cd ./packages/server && npm run start",
     "postinstall": "lerna bootstrap"
   },

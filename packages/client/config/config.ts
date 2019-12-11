@@ -80,7 +80,7 @@ export default {
         {
           path: '/user',
           component: '../layouts/BasicLayout',
-          // authority: ['admin', 'user'],
+          authority: ['admin', 'user'],
           routes: [
             {
               path: 'admin',
@@ -91,7 +91,7 @@ export default {
             },
             {
               name: 'Tickets',
-              icon: 'smile',
+              icon: 'profile',
               path: 'tickets',
               component: './tickets',
             },
