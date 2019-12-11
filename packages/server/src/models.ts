@@ -1,7 +1,7 @@
 export interface Ticket {
   id: number;
   event: Event;
-  owner: number; //User ID
+  ownerId: number;
   price: number;
 }
 
