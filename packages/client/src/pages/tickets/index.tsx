@@ -1,4 +1,4 @@
-import { Card, Form, List, Typography, Button } from 'antd';
+import { Card, Form, List, Typography, Icon, Rate } from 'antd';
 import React, { Component } from 'react';
 
 import { Dispatch } from 'redux';
@@ -49,19 +49,25 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
               className={styles.card}
               hoverable
               cover={<img alt={item.title} src={item.cover} />}
+              actions={[
+                <span>
+                  <Icon type="smile" key="smile" style={{ marginRight: 10 }} />
+                  Transfer
+                </span>,
+              ]}
             >
               <Card.Meta
                 title={
                   <>
-                    <a style={{ marginRight: 10 }}>{item.title}</a>
-                    <Button type="primary">Transfer</Button>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <Rate allowHalf defaultValue={2.5} />
+                      <a style={{ marginRight: 10 }}>{item.title}</a>
+                    </div>
                   </>
                 }
                 description={
                   <>
-                    <Paragraph className={styles.item} ellipsis={{ rows: 2 }}>
-                      {item.subDescription}
-                    </Paragraph>
+                    <p>{item.subDescription}</p>
                   </>
                 }
               />

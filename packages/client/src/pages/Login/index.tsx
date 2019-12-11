@@ -11,6 +11,7 @@ import LoginComponents from './components/Login';
 import styles from './style.less';
 import { LoginParamsType } from '@/services/login';
 import { ConnectState } from '@/models/connect';
+
 const { UserName, Password, Submit } = LoginComponents;
 
 interface LoginProps {
@@ -22,7 +23,7 @@ interface LoginState {
   type: string;
   autoLogin: boolean;
 }
-
+// @ts-ignore
 @connect(({ login, loading }: ConnectState) => ({
   userLogin: login,
   submitting: loading.effects['login/login'],
