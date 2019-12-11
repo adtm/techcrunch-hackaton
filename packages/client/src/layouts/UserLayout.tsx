@@ -49,7 +49,7 @@ const UserLayout: React.SFC<UserLayoutProps> = props => {
           <div className={styles.top}>
             <div className={styles.header}>
               <Link to="/">
-                <img alt="logo" className={styles.logo} src={logo} />
+                <img alt="TicketChain" className={styles.logo} src={logo} />
                 <span className={styles.title}>Ticket Chain</span>
               </Link>
             </div>

@@ -21,7 +21,7 @@ import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { ConnectState } from '@/models/connect';
 import { isAntDesignPro, getAuthorityFromRouter } from '@/utils/utils';
-import logo from '../assets/logo.svg';
+import logo from '../assets/car.png';
 
 const noMatch = (
   <Result
@@ -95,10 +95,10 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
 
   return (
     <ProLayout
-      logo={logo}
+
       menuHeaderRender={(logoDom, titleDom) => (
         <Link to="/">
-          {logoDom}
+          <img src={logo} />
           {titleDom}
         </Link>
       )}

@@ -88,7 +88,7 @@ export default {
               icon: 'crown',
               component: './Admin',
               authority: ['admin'],
-            }, 
+            },
             {
               name: 'Tickets',
               icon: 'smile',
@@ -129,7 +129,7 @@ export default {
         resourcePath: string;
       },
       _: string,
-      localName: string
+      localName: string,
     ) => {
       if (
         context.resourcePath.includes('node_modules') ||
