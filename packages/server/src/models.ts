@@ -1,8 +1,5 @@
 export interface Ticket {
   id: number;
-  name: string;
-  imageSrc: string;
-  price: number;
   owner: number; //User ID
 }
 
