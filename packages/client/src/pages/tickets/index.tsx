@@ -1,4 +1,4 @@
-import { Card, Form, List, Typography, Icon, Rate } from 'antd';
+import { Card, Form, List, Typography, Icon, Rate, Modal, Select } from 'antd';
 import React, { Component } from 'react';
 
 import { Dispatch } from 'redux';
@@ -21,6 +21,33 @@ interface ListSearchProjectsProps extends FormComponentProps {
 const getKey = (id: string, index: number) => `${id}-${index}`;
 
 class ListSearchProjects extends Component<ListSearchProjectsProps> {
+  state = {
+    visible: false,
+    person: null,
+  };
+
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  // @ts-ignore
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
+  // @ts-ignore
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false,
+    });
+  };
+
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
@@ -50,7 +77,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
               hoverable
               cover={<img alt={item.title} src={item.cover} />}
               actions={[
-                <span>
+                <span onClick={() => this.showModal()}>
                   <Icon type="smile" key="smile" style={{ marginRight: 10 }} />
                   Transfer
                 </span>,
@@ -66,9 +93,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
                   </>
                 }
                 description={
-                  <>
                     <p>{item.subDescription}</p>
-                  </>
                 }
               />
               <div className={styles.cardItemContent}>
@@ -94,6 +119,27 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
     return (
       <div className={styles.coverCardList}>
         <div className={styles.cardList}>{cardList}</div>
+        <Modal
+          title="Transfer"
+          visible={this.state.visible}
+          onOk={this.handleOk}
+          onCancel={this.handleCancel}
+        >
+          <p>Select Person</p>
+          <Select
+            style={{ width: 200 }}
+            placeholder="Select a person"
+            optionFilterProp="children"
+            onChange={value => this.setState({ person: value })}
+            filterOption={(input, option) =>
+              // @ts-ignore
+              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            <Select.Option value="tom">Tom</Select.Option>
+            <Select.Option value="paul">Paul</Select.Option>
+          </Select>
+        </Modal>
       </div>
     );
   }
@@ -101,8 +147,6 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
 
 const WarpForm = Form.create<ListSearchProjectsProps>({
   onValuesChange({ dispatch }: ListSearchProjectsProps) {
-    // 表单项变化时请求数据
-    // 模拟查询表单生效
     dispatch({
       type: 'listSearchProjects/fetch',
       payload: {

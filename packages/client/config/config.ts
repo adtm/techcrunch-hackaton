@@ -90,12 +90,6 @@ export default {
               authority: ['admin'],
             }, 
             {
-              path: 'welcome',
-              name: 'welcome',
-              icon: 'crown',
-              component: './Welcome',
-            }, 
-            {
               name: 'Tickets',
               icon: 'smile',
               path: 'tickets',
