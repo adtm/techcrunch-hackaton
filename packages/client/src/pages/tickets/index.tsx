@@ -52,9 +52,6 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
     const { dispatch } = this.props;
     dispatch({
       type: 'listSearchProjects/fetch',
-      payload: {
-        count: 8,
-      },
     });
   }
 
@@ -64,6 +61,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
       loading,
     } = this.props;
 
+    console.log(this.props.listSearchProjects);
     const cardList = list && (
       <List<ListItemDataType>
         rowKey="id"
@@ -75,7 +73,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
             <Card
               className={styles.card}
               hoverable
-              cover={<img alt={item.title} src={item.cover} />}
+              cover={<img alt={item.event.name} src={item.event.imageSrc} />}
               actions={[
                 <span onClick={() => this.showModal()}>
                   <Icon type="smile" key="smile" style={{ marginRight: 10 }} />
@@ -88,12 +86,9 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
                   <>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                       <Rate allowHalf defaultValue={2.5} />
-                      <a style={{ marginRight: 10 }}>{item.title}</a>
+                      <a style={{ marginRight: 10 }}>{item.event.name}</a>
                     </div>
                   </>
-                }
-                description={
-                    <p>{item.subDescription}</p>
                 }
               />
               <div className={styles.cardItemContent}>
@@ -149,9 +144,6 @@ const WarpForm = Form.create<ListSearchProjectsProps>({
   onValuesChange({ dispatch }: ListSearchProjectsProps) {
     dispatch({
       type: 'listSearchProjects/fetch',
-      payload: {
-        count: 8,
-      },
     });
   },
 })(ListSearchProjects);

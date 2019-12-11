@@ -1,7 +1,5 @@
-import request from '@/utils/request';
+import axios from 'axios';
 
 export async function queryFakeList(params: { count: number }) {
-  return request('/api/fake_list', {
-    params,
-  });
+  axios.get('http://localhost:1001/user/tickets');
 }
