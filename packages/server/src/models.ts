@@ -3,6 +3,7 @@ export interface Ticket {
   name: string;
   imageSrc: string;
   price: number;
+  owner: number; //User ID
 }
 
 export interface Event {
@@ -10,4 +11,9 @@ export interface Event {
   name: string;
   imageSrc: string;
   price: number;
+}
+
+export interface User {
+  id: number;
+  name: string;
 }
