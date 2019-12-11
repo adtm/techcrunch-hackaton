@@ -41,7 +41,7 @@ const event = {
 
 router.get("/user/tickets", async ctx => {
   const userId = ctx.query.userId;
-  return new TicketService().getUserTicketsById(userId);
+  ctx.body = new TicketService().getUserTicketsById(userId);
 });
 
 router.get("/ticket", async ctx => {
