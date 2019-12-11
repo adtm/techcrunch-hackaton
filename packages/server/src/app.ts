@@ -1,6 +1,7 @@
 import * as dotenv from "dotenv";
 import Koa from "koa";
 import koaBody from "koa-body";
+import cors from "koa-cors";
 import Router from "koa-router";
 import EventService from "./services/event.service";
 import TicketService from "./services/ticket.service";
@@ -58,6 +59,7 @@ router.post("/ticket", async ctx => {
 });
 
 app.use(koaBody());
+app.use(cors({ origin: "*" }));
 app.use(router.routes());
 
 app.listen(port, () => console.log(`App listening on port ${port}!`));
