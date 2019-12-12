@@ -117,8 +117,14 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
                       <Rate allowHalf defaultValue={item.event.rating} />
                       <a style={{ marginRight: 10 }}>{item.event.name}</a>
+                      
                     </div>
                   </>
+                } 
+                description={
+                  <div style={{display: "flex"}}>
+                      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/440px-QR_code_for_mobile_English_Wikipedia.svg.png" style={{ height: 50}} /> 
+                  </div>
                 }
               />
             </Card>
