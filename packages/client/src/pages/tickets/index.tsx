@@ -1,13 +1,11 @@
-import { Card, Form, List, Typography, Icon, Rate, Modal, Select } from 'antd';
-import React, { Component } from 'react';
-
-import { Dispatch } from 'redux';
+import { Card, Form, Icon, List, Modal, Rate, Select, Typography } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
 import { connect } from 'dva';
 import moment from 'moment';
-import AvatarList from './components/AvatarList';
-import { StateType } from './model';
+import React, { Component } from 'react';
+import { Dispatch } from 'redux';
 import { ListItemDataType } from './data.d';
+import { StateType } from './model';
 import styles from './style.less';
 
 const { Paragraph } = Typography;
@@ -61,6 +59,8 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
       loading,
     } = this.props;
 
+    console.log('yo');
+
     console.log(this.props.listSearchProjects);
     const cardList = list && (
       <List<ListItemDataType>
@@ -94,7 +94,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
               <div className={styles.cardItemContent}>
                 <span>{moment(item.updatedAt).fromNow()}</span>
                 <div className={styles.avatarList}>
-                  <AvatarList size="small">
+                  {/* <AvatarList size="small">
                     {item.members.map((member, i) => (
                       <AvatarList.Item
                         key={getKey(item.id, i)}
@@ -102,7 +102,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
                         tips={member.name}
                       />
                     ))}
-                  </AvatarList>
+                  </AvatarList> */}
                 </div>
               </div>
             </Card>
