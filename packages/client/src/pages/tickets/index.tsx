@@ -7,6 +7,7 @@ import { Dispatch } from 'redux';
 import { ListItemDataType } from './data.d';
 import { StateType } from './model';
 import styles from './style.less';
+import Axios from 'axios';
 
 const { Paragraph } = Typography;
 
@@ -21,7 +22,7 @@ const getKey = (id: string, index: number) => `${id}-${index}`;
 class ListSearchProjects extends Component<ListSearchProjectsProps> {
   state = {
     visible: false,
-    person: null,
+    ownerId: null,
   };
 
   showModal = () => {
@@ -31,8 +32,8 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
   };
 
   // @ts-ignore
-  handleOk = e => {
-    console.log(e);
+  handleOk = async itemId => {
+    await this.updateOwner(itemId);
     this.setState({
       visible: false,
     });
@@ -53,13 +54,25 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
     });
   }
 
+  updateOwner = async (postId: string) => {
+    try {
+      console.log(postId);
+
+      await Axios.put('http://localhost:1001/ticket', {
+        newOwnerId: this.state.ownerId,
+        ticketId: postId,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     const {
       listSearchProjects: { list = [] },
       loading,
     } = this.props;
 
-    console.log('yo');
     const cardList = list && (
       <List<ListItemDataType>
         rowKey="id"
@@ -71,11 +84,17 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
             <Card
               className={styles.card}
               hoverable
-              cover={<img alt={item.event.name} src={item.event.imageSrc} style={{backgroundSize: "contain"}} />}
+              cover={
+                <img
+                  alt={item.event.name}
+                  src={item.event.imageSrc}
+                  style={{ backgroundSize: 'contain' }}
+                />
+              }
               actions={[
                 <span onClick={() => this.showModal()}>
                   <Icon type="smile" key="smile" style={{ marginRight: 10 }} />
-                  Transfer
+                  Transfer - {item.id}
                 </span>,
               ]}
             >
@@ -83,27 +102,35 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
                 title={
                   <>
                     <div style={{ display: 'flex', flexDirection: 'column' }}>
-                      <Rate allowHalf defaultValue={2.5} />
+                      <Rate allowHalf defaultValue={item.event.rating} />
                       <a style={{ marginRight: 10 }}>{item.event.name}</a>
                     </div>
                   </>
                 }
               />
-              <div className={styles.cardItemContent}>
-                <span>{moment(item.updatedAt).fromNow()}</span>
-                <div className={styles.avatarList}>
-                  {/* <AvatarList size="small">
-                    {item.members.map((member, i) => (
-                      <AvatarList.Item
-                        key={getKey(item.id, i)}
-                        src={member.avatar}
-                        tips={member.name}
-                      />
-                    ))}
-                  </AvatarList> */}
-                </div>
-              </div>
             </Card>
+            <Modal
+              title="Transfer"
+              visible={this.state.visible}
+              onOk={async () => await this.handleOk(item.id)}
+              onCancel={this.handleCancel}
+            >
+              <p>Select Person</p>
+              <Select
+                style={{ width: 200 }}
+                placeholder="Select a person"
+                optionFilterProp="children"
+                onChange={value => {
+                  this.setState({ ownerId: value });
+                }}
+                filterOption={(input, option) =>
+                  // @ts-ignore
+                  option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                }
+              >
+                <Select.Option value="2">John Cena</Select.Option>
+              </Select>
+            </Modal>
           </List.Item>
         )}
       />
@@ -112,27 +139,6 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
     return (
       <div className={styles.coverCardList}>
         <div className={styles.cardList}>{cardList}</div>
-        <Modal
-          title="Transfer"
-          visible={this.state.visible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
-          <p>Select Person</p>
-          <Select
-            style={{ width: 200 }}
-            placeholder="Select a person"
-            optionFilterProp="children"
-            onChange={value => this.setState({ person: value })}
-            filterOption={(input, option) =>
-              // @ts-ignore
-              option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-            }
-          >
-            <Select.Option value="tom">Tom</Select.Option>
-            <Select.Option value="paul">Paul</Select.Option>
-          </Select>
-        </Modal>
       </div>
     );
   }
