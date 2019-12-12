@@ -58,7 +58,7 @@ router.post("/ticket", async ctx => {
   ctx.body = {};
 });
 
-router.post('/login', async ctx => {
+router.put('/login', async ctx => {
   const password = ctx.request.body.password
   const userName = ctx.request.body.userName
   if (password === 'secret' && userName === 'john') {
