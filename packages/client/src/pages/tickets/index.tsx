@@ -70,6 +70,11 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
     }
   };
 
+  isOwner = logUserId => {
+    const { userId } = JSON.parse(localStorage.getItem('userId'));
+    return userId != logUserId;
+  };
+
   render() {
     const {
       listSearchProjects: { list = [] },
@@ -136,7 +141,10 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
                   option.props.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
               >
-                <Select.Option value="2">John Cena</Select.Option>
+                {this.isOwner('1') ? (
+                  <Select.Option value="1">Tomas Eglinskas</Select.Option>
+                ) : null}
+                {this.isOwner('2') ? <Select.Option value="2">John Cena</Select.Option> : null}
               </Select>
             </Modal>
           </List.Item>
