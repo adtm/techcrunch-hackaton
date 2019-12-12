@@ -33,7 +33,9 @@ export const events = [
   }
 ];
 export const tickets: Ticket[] = [
-  { id: 1, ownerId: 1, event: events[0], price: 20 }
+  { id: 1, ownerId: 1, event: events[0], price: 20 },
+  { id: 2, ownerId: 1, event: events[1], price: 30 },
+  { id: 3, ownerId: 1, event: events[2], price: 30 }
 ];
 export const users = [
   {
