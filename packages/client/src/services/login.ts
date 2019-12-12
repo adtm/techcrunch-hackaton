@@ -1,5 +1,5 @@
 import request from '@/utils/request';
-
+import axios from 'axios'
 export interface LoginParamsType {
   userName: string;
   password: string;
@@ -8,10 +8,10 @@ export interface LoginParamsType {
 }
 
 export async function fakeAccountLogin(params: LoginParamsType) {
-  return request('/api/login/account', {
-    method: 'POST',
-    data: params,
-  });
+  const response = await axios.put('http://ticket-chain.herokuapp.com/ticket', {
+    ...params
+  })
+  return response.data
 }
 
 export async function getFakeCaptcha(mobile: string) {
