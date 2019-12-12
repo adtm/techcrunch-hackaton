@@ -8,9 +8,7 @@ export interface LoginParamsType {
 }
 
 export async function fakeAccountLogin(params: LoginParamsType) {
-  const response = await axios.put('http://ticket-chain.herokuapp.com/ticket', {
-    ...params
-  })
+  const response = await axios.get(`http://ticket-chain.herokuapp.com/ticket?userName=${params.userName}&password=${params.password}`)
   return response.data
 }
 
