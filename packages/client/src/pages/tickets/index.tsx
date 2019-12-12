@@ -60,8 +60,6 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
     } = this.props;
 
     console.log('yo');
-
-    console.log(this.props.listSearchProjects);
     const cardList = list && (
       <List<ListItemDataType>
         rowKey="id"
@@ -73,7 +71,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
             <Card
               className={styles.card}
               hoverable
-              cover={<img alt={item.event.name} src={item.event.imageSrc} />}
+              cover={<img alt={item.event.name} src={item.event.imageSrc} style={{backgroundSize: "contain"}} />}
               actions={[
                 <span onClick={() => this.showModal()}>
                   <Icon type="smile" key="smile" style={{ marginRight: 10 }} />

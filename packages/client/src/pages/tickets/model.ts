@@ -2,7 +2,7 @@ import { AnyAction, Reducer } from 'redux';
 
 import { EffectsCommandMap } from 'dva';
 import { ListItemDataType } from './data.d';
-import { queryFakeList } from './service';
+import { queryFakeList, queryUserName } from './service';
 
 export interface StateType {
   list: ListItemDataType[];
@@ -34,10 +34,11 @@ const Model: ModelType = {
   effects: {
     *fetch({ payload }, { call, put }) {
       const response = yield call(queryFakeList, payload);
-      console.log(response);
+      const user = yield call(queryUserName, payload);
       yield put({
         type: 'queryList',
         payload: Array.isArray(response) ? response : [],
+        user
       });
     },
   },
@@ -47,6 +48,7 @@ const Model: ModelType = {
       return {
         ...state,
         list: action.payload,
+        user: action.user
       };
     },
   },
