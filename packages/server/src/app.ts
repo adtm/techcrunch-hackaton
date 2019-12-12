@@ -12,7 +12,7 @@ dotenv.config();
 const app = new Koa();
 const router = new Router();
 
-const port = process.env.PORT || 3000;
+const port = 1001;
 
 router.get("/", async ctx => {
   ctx.body = "Hello World!";
@@ -22,7 +22,7 @@ router.get("/", async ctx => {
 
 router.get("/user", async ctx => {
   //Username
-  ctx.body = new UserService().getUser(ctx.query.username);
+  ctx.body = new UserService().getUser(ctx.query.userId);
 });
 
 //Events

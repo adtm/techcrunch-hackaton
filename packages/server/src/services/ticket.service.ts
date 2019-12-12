@@ -12,7 +12,6 @@ class TicketService {
 
   updateTicketOwner(ticketId: number, newOwnerId: number) {
     let ticket = tickets.find(ticket => ticket.id == ticketId);
-    console.log(ticket);
     ticket.ownerId = newOwnerId;
     return ticket;
   }

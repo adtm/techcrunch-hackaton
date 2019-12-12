@@ -3,8 +3,8 @@ import { users } from "../data";
 class UserService {
   constructor() {}
 
-  getUser(username) {
-    return users.find(user => user.username === username);
+  getUser(userId) {
+    return users.find(user => user.userid == userId);
   }
 }
 
