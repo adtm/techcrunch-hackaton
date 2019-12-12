@@ -12,7 +12,7 @@ dotenv.config();
 const app = new Koa();
 const router = new Router();
 
-const port = 1001;
+const port = process.env.PORT || 1001;
 
 router.get("/", async ctx => {
   ctx.body = "Hello World!";
