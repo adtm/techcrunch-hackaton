@@ -98,7 +98,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = props => {
 
       menuHeaderRender={(logoDom, titleDom) => (
         <Link to="/">
-          <img src={logo} />
+          <img src={logo} style={{height: 40}} />
           {titleDom}
         </Link>
       )}
