@@ -5,7 +5,7 @@
     "lerna": "lerna",
     "start": "lerna run --parallel start",
     "api": "cd ./packages/server && npm run start",
-    "postinstall": "lerna bootstrap"
+    "postinstall": "cd ./packages/server && npm i"
   },
   "devDependencies": {
     "lerna": "^3.18.4"
