@@ -23,7 +23,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
   state = {
     visible: false,
     ownerId: null,
-    clickedPostId: null
+    clickedPostId: null,
   };
 
   showModal = () => {
@@ -61,6 +61,10 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
         newOwnerId: this.state.ownerId,
         ticketId: this.state.clickedPostId,
       });
+      const { dispatch } = this.props;
+      dispatch({
+        type: 'listSearchProjects/fetch',
+      });
     } catch (err) {
       console.log(err);
     }
@@ -91,10 +95,12 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
                 />
               }
               actions={[
-                <span onClick={() => {
-                  this.showModal()
-                  this.setState({ clickedPostId: item.id })
-                }}>
+                <span
+                  onClick={() => {
+                    this.showModal();
+                    this.setState({ clickedPostId: item.id });
+                  }}
+                >
                   <Icon type="smile" key="smile" style={{ marginRight: 10 }} />
                   Transfer
                 </span>,
