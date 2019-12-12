@@ -57,7 +57,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
 
   updateOwner = async () => {
     try {
-      await Axios.put('http://localhost:1001/ticket', {
+      await Axios.put('http://ticket-chain.herokuapp.com/ticket', {
         newOwnerId: this.state.ownerId,
         ticketId: this.state.clickedPostId,
       });
