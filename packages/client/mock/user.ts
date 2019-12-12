@@ -29,6 +29,7 @@ export default {
   ],
   'POST /api/login/account': (req: Request, res: Response) => {
     const { password, userName, type } = req.body;
+    console.log(password, userName)
     if (password === 'secret' && userName === 'john') {
       res.send({
         status: 'ok',

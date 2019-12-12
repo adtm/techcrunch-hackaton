@@ -58,6 +58,33 @@ router.post("/ticket", async ctx => {
   ctx.body = {};
 });
 
+router.post('/login', async ctx => {
+  const password = ctx.request.body.password
+  const userName = ctx.request.body.userName
+  if (password === 'secret' && userName === 'john') {
+    ctx.body = {
+      status: 'ok',
+      userId: "2"
+    };
+  }
+
+  else if (password === 'secret' && userName === 'tom') {
+    ctx.body = {
+      status: 'ok',
+      currentAuthority: 'user',
+      userId: "1"
+    } 
+  }
+
+  else {
+    ctx.body = {
+      status: 'error',
+      currentAuthority: 'guest',
+      userId: "1"
+    } 
+  }
+})
+
 app.use(koaBody());
 app.use(cors({ origin: "*" }));
 app.use(router.routes());
