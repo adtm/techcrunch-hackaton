@@ -23,6 +23,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
   state = {
     visible: false,
     ownerId: null,
+    clickedPostId: null
   };
 
   showModal = () => {
@@ -32,8 +33,8 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
   };
 
   // @ts-ignore
-  handleOk = async itemId => {
-    await this.updateOwner(itemId);
+  handleOk = async () => {
+    await this.updateOwner();
     this.setState({
       visible: false,
     });
@@ -54,13 +55,11 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
     });
   }
 
-  updateOwner = async (postId: string) => {
+  updateOwner = async () => {
     try {
-      console.log(postId);
-
       await Axios.put('http://localhost:1001/ticket', {
         newOwnerId: this.state.ownerId,
-        ticketId: postId,
+        ticketId: this.state.clickedPostId,
       });
     } catch (err) {
       console.log(err);
@@ -92,9 +91,12 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
                 />
               }
               actions={[
-                <span onClick={() => this.showModal()}>
+                <span onClick={() => {
+                  this.showModal()
+                  this.setState({ clickedPostId: item.id })
+                }}>
                   <Icon type="smile" key="smile" style={{ marginRight: 10 }} />
-                  Transfer - {item.id}
+                  Transfer
                 </span>,
               ]}
             >
@@ -112,7 +114,7 @@ class ListSearchProjects extends Component<ListSearchProjectsProps> {
             <Modal
               title="Transfer"
               visible={this.state.visible}
-              onOk={async () => await this.handleOk(item.id)}
+              onOk={this.handleOk}
               onCancel={this.handleCancel}
             >
               <p>Select Person</p>

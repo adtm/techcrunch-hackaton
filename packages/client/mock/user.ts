@@ -29,16 +29,15 @@ export default {
   ],
   'POST /api/login/account': (req: Request, res: Response) => {
     const { password, userName, type } = req.body;
-    if (password === 'secret' && userName === 'admin') {
+    if (password === 'secret' && userName === 'john') {
       res.send({
         status: 'ok',
         type,
-        currentAuthority: 'admin',
         userId: "2"
       });
       return;
     }
-    if (password === 'secret' && userName === 'user') {
+    if (password === 'secret' && userName === 'tom') {
       res.send({
         status: 'ok',
         type,
